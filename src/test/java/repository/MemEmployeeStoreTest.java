@@ -8,18 +8,18 @@ public class MemEmployeeStoreTest {
 
     @Test
     public void whenSave() {
-        MemEmployeeStore memEmployeeStore = new MemEmployeeStore();
+        EmployeeRepository employeeRepository = new EmployeeRepository();
         Employee employee = new Employee("Ilya", "Russia");
-        memEmployeeStore.save(employee);
-        Assert.assertNotNull(memEmployeeStore.findAll()[0]);
+        employeeRepository.save(employee);
+        Assert.assertNotNull(employeeRepository.findAll()[0]);
     }
 
     @Test
     public void whenFindById() {
-        MemEmployeeStore memEmployeeStore = new MemEmployeeStore();
+        EmployeeRepository employeeRepository = new EmployeeRepository();
         Employee employee = new Employee("Ilya", "Russia");
-        memEmployeeStore.save(employee);
-        Employee result = memEmployeeStore.findById(employee.getId());
+        employeeRepository.save(employee);
+        Employee result = employeeRepository.findById(employee.getId());
         Assert.assertNotNull(result);
     }
 }
