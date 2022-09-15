@@ -4,6 +4,8 @@ import model.Employee;
 import repository.EmployeeRepository;
 import util.Constants;
 
+import java.util.List;
+
 public class EmployeeService {
 
     private EmployeeRepository employeeRepository = new EmployeeRepository();
@@ -17,7 +19,7 @@ public class EmployeeService {
         return employeeRepository.delete(id);
     }
 
-    public Employee[] findAll() {
+    public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
 }

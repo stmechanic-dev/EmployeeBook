@@ -11,7 +11,7 @@ public class MemEmployeeStoreTest {
         EmployeeRepository employeeRepository = new EmployeeRepository();
         Employee employee = new Employee("Ilya", "Russia");
         employeeRepository.save(employee);
-        Assert.assertNotNull(employeeRepository.findAll()[0]);
+        Assert.assertNotNull(employeeRepository.findAll());
     }
 
     @Test

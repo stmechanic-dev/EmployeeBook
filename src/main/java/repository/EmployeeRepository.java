@@ -1,57 +1,34 @@
 package repository;
 
 import model.Employee;
-import util.Constants;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeRepository {
 
-    private Employee[] employees = new Employee[10];
+    private List<Employee> employees = new ArrayList<>();
     private int index = 0;
 
     public Employee save(Employee employee) {
-        if (employees.length - 1 == index) {
-            System.out.println("Book size is max");
-            employee.setId(Constants.INCORRECT_ID);
-        } else {
-            employees[index] = employee;
-            index++;
-        }
+
+        employees.add(employee);
+
         return employee;
     }
 
     public boolean update(long id, Employee employee) {
-        for (int i = 0; i < employees.length;i++) {
 
-            long employeeId = employees[i].getId();
+        employees.set((int) id, employee);
 
-            if (employeeId == id) {
-                employee.setId(employeeId);
-                employees[i] = employee;
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
 
     public boolean delete(long id) {
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getId() == id) {
-                employees[i] = null;
-                index--;
-                return true;
-            }
-        }
 
-        for (int i = 0; i < employees.length - 1; i++) {
-            if (Objects.isNull(employees[i])) {
-                employees[i] = employees[i + 1];
-                employees[i + 1] = null;
-            }
-        }
+        employees.remove((int) id);
 
-        return false;
+        return true;
     }
 
     public boolean delete(String country) {
@@ -59,34 +36,23 @@ public class EmployeeRepository {
     }
 
     public Employee findById(long id) {
-        for (Employee employee : employees) {
-            if(id == employee.getId()) {
-                return employee;
-            }
-        }
-        return null;
+        return employees.get((int) id);
     }
 
-    public Employee[] findAllByName(String name) {
-        return null;
-    }
+    public List<Employee> findAllByName(String name) {
 
-    public Employee[] findAll() {
-        int count = 0;
+        List<Employee> result = new ArrayList<>();
+
         for (Employee employee : employees) {
-            if (Objects.nonNull(employee)) {
-                count++;
+            if (employee.getName().equals(name)) {
+                result.add(employee);
             }
         }
 
-        Employee[] result = new Employee[count];
-
-        for (Employee employee : employees) {
-            if (Objects.nonNull(employee)) {
-                count--;
-                result[count] = employee;
-            }
-        }
         return result;
+    }
+
+    public List<Employee> findAll() {
+        return employees;
     }
 }
