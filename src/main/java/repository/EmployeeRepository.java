@@ -36,7 +36,18 @@ public class EmployeeRepository {
     }
 
     public Employee findById(long id) {
-        return employees.get((int) id);
+
+        Employee result = null;
+
+        for (Employee employee : employees) {
+            if (employee.getId() == id) {
+                result = employee;
+            } else {
+                System.out.println("Incorrect ID");
+            }
+        }
+
+        return result;
     }
 
     public List<Employee> findAllByName(String name) {
